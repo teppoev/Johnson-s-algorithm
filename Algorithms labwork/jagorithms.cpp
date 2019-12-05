@@ -28,7 +28,7 @@ void DijkstraSPF(std::list<Vertex*> vertices, std::list<Arc*> arcs, Vertex* sour
 		d[v->vertex->id - 1] = v->key;
 		isInFibHeap[v->vertex->id - 1] = false;
 	}
-	for (int i = 0; i < vertices.size(); ++i) delete nodes[i];
+	for (unsigned int i = 0; i < vertices.size(); ++i) delete nodes[i];
 	delete[] nodes;
 }
 
@@ -36,7 +36,7 @@ bool BellmanFordSPF(std::list<Vertex*> vertices, std::list<Arc*> arcs, Vertex* s
 	for (Vertex* vertex : vertices) {
 		d[vertex->id - 1] = vertex->id == source->id ? 0 : _INFINITY;
 	}
-	for (int i = 1; i < vertices.size(); ++i) {
+	for (unsigned int i = 1; i < vertices.size(); ++i) {
 		for (Arc* edge : arcs) {
 			if (d[edge->begin->id - 1] != _INFINITY && d[edge->end->id - 1] > d[edge->begin->id - 1] + edge->weight)
 				d[edge->end->id - 1] =  d[edge->begin->id - 1] + edge->weight;
@@ -69,7 +69,7 @@ Vertex* CreateNewGraph(std::list<Vertex*> vertices, std::list<Arc*> arcs, std::l
 
 int** JohnsonSPF(std::list<Vertex*> vertices, std::list<Arc*> arcs) {
 	int** D = new int* [vertices.size()];
-	for (int i = 0; i < vertices.size(); ++i) {
+	for (unsigned int i = 0; i < vertices.size(); ++i) {
 		D[i] = new int[vertices.size()];
 	}
 

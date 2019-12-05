@@ -1,10 +1,12 @@
 #include <vector>
 #include "generator.h"
 
-int** generate(int& n, int& m) {
-	n = rand() % 10 + 1;
-	m = rand() % (n * (n - 1) + 1);
+void generate(int& n, int& m, int min_n, int max_n, int min_m, int max_m) {
+	n = rand() % (max_n - min_n + 1) + min_n;
+	m = rand() % (max_m - min_m + 1) + min_m;
+}
 
+int** generate(int n, int m) {
 	int** matrix = new int* [n];
 	for (int i = 0; i < n; ++i) {
 		matrix[i] = new int[n];
@@ -19,14 +21,14 @@ int** generate(int& n, int& m) {
 			i = rand() % n;
 			j = rand() % n;
 		} while (i == j || matrix[i][j] != NORIBS);
-		matrix[i][j] = rand() % 21 - 5;
-		//matrix[i][j] = rand() % 11;
+		matrix[i][j] = rand() % 21;
+		//matrix[i][j] = rand() % 21 - 5;
 	}
 
 	return matrix;
 }
 
-int** generate1(int& n, int& m) {
+/*int** generate1(int& n, int& m) {
 	n = 3; m = 2;
 	int** matrix = new int* [n];
 	for (int i = 0; i < n; ++i) {
@@ -38,7 +40,7 @@ int** generate1(int& n, int& m) {
 	//matrix[3][0] = 0; matrix[3][1] = 8; matrix[3][2] = 6; matrix[3][3] = 0; matrix[3][4] = NORIBS;
 	//matrix[4][0] = NORIBS; matrix[4][1] = 14; matrix[4][2] = 14; matrix[4][3] = NORIBS; matrix[4][4] = 0;
 	return matrix;
-}
+}*/
 
 void fromMatrixToGraph(int n, int m, int** matrix, std::list<Vertex*>& vertices, std::list<Arc*>& edges) {
 	vertices.clear(); edges.clear();
